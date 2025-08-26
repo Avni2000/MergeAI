@@ -3,6 +3,7 @@ node_modules/**
 dist/**
 out/**
 node_modules/.bin
+package-lock.json
 
 
 
