@@ -1,0 +1,154 @@
+{
+  "name": "mergeai",
+  "displayName": "MergeAI - AI-Powered Merge Conflict Resolver",
+  "description": "Intelligent merge conflict resolution using AI with support for OpenAI/Claude APIs and local Ollama models",
+  "version": "0.0.1",
+  "publisher": "mergeai-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "git",
+    "merge",
+    "conflict",
+    "ai",
+    "ollama",
+    "openai",
+    "claude"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Avni2000/mergeai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mergeai/issues"
+  },
+  "license": "MIT",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mergeai.resolveCurrent",
+        "title": "MergeAI: Resolve Current Conflict"
+      },
+      {
+        "command": "mergeai.resolveAll",
+        "title": "MergeAI: Resolve All Conflicts (Agent Mode)"
+      },
+      {
+        "command": "mergeai.configure",
+        "title": "MergeAI: Configure AI Provider"
+      },
+      {
+        "command": "mergeai.showSuggestions",
+        "title": "MergeAI: Show Suggestions for Current Conflict"
+      }
+    ],
+    "configuration": {
+      "title": "MergeAI",
+      "properties": {
+        "mergeai.provider": {
+          "type": "string",
+          "default": "ollama",
+          "enum": [
+            "ollama",
+            "openai",
+            "claude"
+          ],
+          "description": "AI provider to use for merge conflict resolution"
+        },
+        "mergeai.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "URL for local Ollama instance"
+        },
+        "mergeai.ollamaModel": {
+          "type": "string",
+          "default": "codellama",
+          "description": "Ollama model to use"
+        },
+        "mergeai.openaiModel": {
+          "type": "string",
+          "default": "gpt-4",
+          "enum": [
+            "gpt-4",
+            "gpt-4-turbo",
+            "gpt-3.5-turbo"
+          ],
+          "description": "OpenAI model to use"
+        },
+        "mergeai.claudeModel": {
+          "type": "string",
+          "default": "claude-3-opus-20240229",
+          "enum": [
+            "claude-3-opus-20240229",
+            "claude-3-sonnet-20240229",
+            "claude-3-haiku-20240307"
+          ],
+          "description": "Claude model to use"
+        },
+        "mergeai.autoResolve": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically resolve conflicts without confirmation (Agent Mode)"
+        },
+        "mergeai.contextLines": {
+          "type": "number",
+          "default": 50,
+          "description": "Number of context lines to include when analyzing conflicts"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "mergeai.resolveCurrent",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.2.2",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "chai": "^6.0.1",
+    "eslint": "^8.56.0",
+    "generator-code": "^1.11.2",
+    "glob": "^11.0.3",
+    "mocha": "^11.7.1",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "yo": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "ollama": "^0.5.0"
+  }
+}

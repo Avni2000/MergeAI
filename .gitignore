@@ -1,0 +1,12 @@
+node_modules/**
+.vscode-test/**
+dist/**
+out/**
+node_modules/.bin
+
+
+
+
+.vscode-test
+dist
+out
